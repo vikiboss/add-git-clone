@@ -1,11 +1,11 @@
 // ==UserScript==
-// @name            add `git clone` automatically when copying ssh repo link
+// @name            add `git clone` prefix
 // @description     a simple script to `add git clone` prefix when copying ssh repo link
 // @update          2023/11/30 09:50:00
 // @namespace       add-git-clone
 // @match           *://*/*
 // @grant           none
-// @version         1.0
+// @version         1.1
 // @author          Viki <hi@viki.moe>
 // @feedback-url    https://github.com/vikiboss/add-git-clone/issues
 // @github          https://github.com/vikiboss/add-git-clone
@@ -32,7 +32,7 @@
         let selection = window.getSelection().toString();
         if (shouldPrefix(selection)) {
             e.clipboardData.setData('text/plain', 'git clone ' + selection);
-            e.preventDefault(); // 阻止默认行为
+            e.preventDefault();
         }
     });
 })();
