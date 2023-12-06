@@ -5,7 +5,7 @@
 // @namespace       add-git-clone
 // @match           *://*/*
 // @grant           none
-// @version         1.1
+// @version         1.2
 // @author          Viki <hi@viki.moe>
 // @feedback-url    https://github.com/vikiboss/add-git-clone/issues
 // @github          https://github.com/vikiboss/add-git-clone
@@ -20,13 +20,15 @@
         return text.startsWith('git@');
     }
 
-    const originalWriteText = navigator.clipboard.writeText;
-    navigator.clipboard.writeText = function(data) {
-        if (shouldPrefix(data)) {
-            data = 'git clone ' + data;
-        }
-        return originalWriteText.call(navigator.clipboard, data);
-    };
+    if (navigator.clipboard) {
+        const originalWriteText = navigator.clipboard.writeText;
+        navigator.clipboard.writeText = function(data) {
+            if (shouldPrefix(data)) {
+                data = 'git clone ' + data;
+            }
+            return originalWriteText.call(navigator.clipboard, data);
+        }; 
+    }
 
     document.addEventListener('copy', function(e) {
         let selection = window.getSelection().toString();
