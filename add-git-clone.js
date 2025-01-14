@@ -1,15 +1,17 @@
 // ==UserScript==
 // @name            add `git clone` prefix
 // @description     a simple script to `add git clone` prefix when copying ssh repo link
-// @update          2024/02/06 10:30:00
+// @update          2025/01/14 15:00:00
 // @namespace       add-git-clone
 // @match           *://*/*
 // @grant           none
-// @version         1.3
+// @version         1.4
 // @author          Viki <hi@viki.moe>
 // @feedback-url    https://github.com/vikiboss/add-git-clone/issues
 // @github          https://github.com/vikiboss/add-git-clone
 // @license         MIT
+// @downloadURL https://update.greasyfork.org/scripts/481050/add%20%60git%20clone%60%20prefix.user.js
+// @updateURL https://update.greasyfork.org/scripts/481050/add%20%60git%20clone%60%20prefix.meta.js
 // ==/UserScript==
 
 ;(function () {
@@ -24,7 +26,7 @@
       let selection = window.getSelection().toString()
 
       if (shouldPrefix(selection)) {
-        e.clipboardData.setData('text/plain', 'git clone ' + selection)
+        e.clipboardData.setData('text/plain', 'git clone --depth 1 ' + selection)
         e.preventDefault()
       }
     })
